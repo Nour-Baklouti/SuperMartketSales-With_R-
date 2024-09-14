@@ -1,0 +1,127 @@
+---
+title: "Supermarket Data Visualization"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+---
+```{r import-data ,echo=FALSE}
+basesm<-read.csv("C:/Users/nourb/Desktop/SupermarketSales/bdsupermarket_sales.csv") 
+
+library(flexdashboard)
+library(ggplot2)
+```
+
+# A propos {.sidebar}
+Bienvenue dans notre tableau de bord dédié à l'analyse des achats de supermarché 
+
+Ce tableau de bord a été conçu pour vous fournir une vue d'ensemble claire et détaillée des tendances, des performances et des opportunités dans ce secteur dynamique.
+
+À travers une analyse approfondie des données, nous allons explorer les habitudes d'achat des clients, les tendances saisonnières, les performances des produits, et bien plus encore. Ces informations cruciales vous aideront à prendre des décisions éclairées, à optimiser vos opérations et à rester compétitif sur le marché.
+
+# Clients 
+```{r}
+barplot(table(basesm$Gender), col = c("blue",  "pink"),
+        main = "Répartition du genre des clients",
+        xlab = "Type de client", ylab = "Fréquence")
+
+barplot(table(basesm$Customer.type), col = c("orange",  "yellow","green"),
+        main = "Répartition des types de clients",
+        xlab = "Type de client", ylab = "Fréquence")
+
+ggplot(basesm) +geom_point(aes(x = Payment, y = Gender))
+ggplot(basesm, aes(x = "", fill = `Customer.type`)) +
+  geom_bar(width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Répartition des types de clients",
+       fill = "Type de client",
+       x = NULL,
+       y = NULL)
+table(basesm$Customer.type)
+table(basesm$Gender)
+
+```
+
+# Paiement 
+```{r}
+barplot(table(basesm$Payment), col = c("blue", "green", "red", "yellow"),
+        main = "Répartition des types de paiments",
+        xlab = "Type de client", ylab = "Fréquence")
+hist(basesm$Unit.price, col = "skyblue",
+     main = "Répartition des prix",
+     xlab = "Unit price",
+     ylab = "Fréquence")
+ggplot(basesm) + geom_histogram(aes(x = Unit.price )) 
+ggplot(basesm, aes(x = Gender, fill = Payment)) +
+  geom_bar(position = "stack") +
+  labs(title = "Répartition du mode de paiement par genre",
+       x = "Genre",
+       y = "Nombre de transactions",
+       fill = "Mode de paiement")
+ggplot(basesm) +
+  geom_bar(
+    aes(x = Payment),
+    fill = "darkblue", width = .5)
+```
+
+# Produit
+```{r}
+ggplot(basesm, aes(x = Product.line, y = Total, fill = Product.line)) +
+  geom_boxplot() +
+  labs(title = "Montant total de l'achat par catégorie de produit",
+       x = "Catégorie de produit",
+       y = "Montant total de l'achat")
+
+ggplot(basesm, aes(x = Quantity)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 30) +
+  labs(title = "Distribution de la quantité d'articles achetés",
+       x = "Quantité d'articles",
+       y = "Fréquence")
+
+barplot(table(basesm$Product.line))
+ggplot(basesm) + geom_histogram(aes(x = Rating ))
+
+```
+
+# Magasin 
+
+```{r}
+barplot(table(basesm$City), col = c("black", "green", "purple", "yellow"),
+        main = "Répartition des magasins par cité ",
+        xlab = "Cité ", ylab = "Fréquence")
+table(basesm$City)
+dotchart(table(basesm$City))
+ggplot(basesm, aes(x = Branch)) +
+  geom_bar(fill = "lightgreen") +
+  labs(title = "Nombre de transactions par succursale",
+       x = "Succursale",
+       y = "Nombre de transactions")
+ggplot(basesm) + geom_histogram(aes(x = gross.income )) 
+ggplot(basesm) + geom_histogram(aes(x = Rating )) 
+
+
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+### 
+
+```{r}
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### 
+
+```{r}
+
+```
+
+### 
+
+```{r}
+
+```
+

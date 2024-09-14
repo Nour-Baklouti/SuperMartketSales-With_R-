@@ -1,0 +1,619 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{sectsty}
+\sectionfont{\fontsize{20}{25}\selectfont}
+\subsectionfont{\fontsize{16}{20}\selectfont}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Projet : Super Market Sales Visualizations},
+  pdfauthor={Tek-Up School},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Projet : Super Market Sales Visualizations}
+\author{Tek-Up School}
+\date{2023-2024}
+
+\begin{document}
+\maketitle
+
+\vspace{4.5cm}
+
+\hypertarget{pruxe9sentuxe9-par}{%
+\subsection{Présenté par :}\label{pruxe9sentuxe9-par}}
+
+\begin{itemize}
+\tightlist
+\item
+  Nour Baklouti
+\item
+  Rania Dridi
+\end{itemize}
+
+\vspace{0.5cm}
+
+\hypertarget{encadruxe9-par}{%
+\subsection{Encadré par :}\label{encadruxe9-par}}
+
+\begin{itemize}
+\tightlist
+\item
+  Dr.~Nadjib Mohamed Mehdi BENDAOUD
+\end{itemize}
+
+\vfill
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{supermarket-data-visualization}{%
+\subsection{Supermarket Data
+Visualization}\label{supermarket-data-visualization}}
+
+Ce rapport vise à visualiser et à analyser :
+
+1.La relation des clients avec le supermarché.
+
+2.Les méthodes de paiement utilisées dans le supermarché.
+
+3.La relation entre les produits et les quantités.
+
+4.Les produits et leurs évaluations.
+
+5.Les types de produits et leurs ventes.
+
+=\textgreater{} Pour plus d'informations, vous trouverez ci-joint le
+lien vers notre notebook Kaggle.
+
+\url{https://www.kaggle.com/code/nourbaklouti/bi-supermarket}.
+
+\hypertarget{ruxe9sumuxe9-du-dataframe}{%
+\subsection{Résumé du DataFrame}\label{ruxe9sumuxe9-du-dataframe}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: le package 'ggplot2' a été compilé avec la version R 4.3.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: le package 'tidyverse' a été compilé avec la version R 4.3.3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: le package 'tidyr' a été compilé avec la version R 4.3.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: le package 'readr' a été compilé avec la version R 4.3.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: le package 'purrr' a été compilé avec la version R 4.3.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: le package 'dplyr' a été compilé avec la version R 4.3.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: le package 'stringr' a été compilé avec la version R 4.3.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: le package 'forcats' a été compilé avec la version R 4.3.2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: le package 'lubridate' a été compilé avec la version R 4.3.3
+\end{verbatim}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.3     v readr     2.1.4
+## v forcats   1.0.0     v stringr   1.5.0
+## v lubridate 1.9.3     v tibble    3.2.1
+## v purrr     1.0.2     v tidyr     1.3.0
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{basesm}\OtherTok{\textless{}{-}}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"C:/Users/nourb/Desktop/SupermarketSales/bdsupermarket\_sales.csv"}\NormalTok{)}
+
+
+
+\FunctionTok{summary}\NormalTok{(basesm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Invoice.ID           Branch              City           Customer.type     
+##  Length:1000        Length:1000        Length:1000        Length:1000       
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##     Gender          Product.line         Unit.price       Quantity    
+##  Length:1000        Length:1000        Min.   :10.08   Min.   : 1.00  
+##  Class :character   Class :character   1st Qu.:32.88   1st Qu.: 3.00  
+##  Mode  :character   Mode  :character   Median :55.23   Median : 5.00  
+##                                        Mean   :55.67   Mean   : 5.51  
+##                                        3rd Qu.:77.94   3rd Qu.: 8.00  
+##                                        Max.   :99.96   Max.   :10.00  
+##      Tax.5.            Total             Date               Time          
+##  Min.   : 0.5085   Min.   :  10.68   Length:1000        Length:1000       
+##  1st Qu.: 5.9249   1st Qu.: 124.42   Class :character   Class :character  
+##  Median :12.0880   Median : 253.85   Mode  :character   Mode  :character  
+##  Mean   :15.3794   Mean   : 322.97                                        
+##  3rd Qu.:22.4453   3rd Qu.: 471.35                                        
+##  Max.   :49.6500   Max.   :1042.65                                        
+##    Payment               cogs        gross.margin.percentage  gross.income    
+##  Length:1000        Min.   : 10.17   Min.   :4.762           Min.   : 0.5085  
+##  Class :character   1st Qu.:118.50   1st Qu.:4.762           1st Qu.: 5.9249  
+##  Mode  :character   Median :241.76   Median :4.762           Median :12.0880  
+##                     Mean   :307.59   Mean   :4.762           Mean   :15.3794  
+##                     3rd Qu.:448.90   3rd Qu.:4.762           3rd Qu.:22.4453  
+##                     Max.   :993.00   Max.   :4.762           Max.   :49.6500  
+##      Rating      
+##  Min.   : 4.000  
+##  1st Qu.: 5.500  
+##  Median : 7.000  
+##  Mean   : 6.973  
+##  3rd Qu.: 8.500  
+##  Max.   :10.000
+\end{verbatim}
+
+\hypertarget{description-des-variables}{%
+\section{Description des variables}\label{description-des-variables}}
+
+Les variables présentes dans le jeu de données sont les suivantes :
+
+\begin{itemize}
+\item
+  Invoice ID : Identifiant unique de la facture.
+\item
+  Branch : Succursale du supermarché (A, B, C).
+\item
+  City :Ville où se trouve le supermarché.
+\item
+  Customer type :Type de client (Member pour membre, Normal pour
+  non-membre).
+\item
+  Gender : Genre du client (Male pour homme, Female pour femme).
+\item
+  Product line :Catégorie du produit.
+\item
+  Unit price : Prix unitaire du produit.
+\item
+  Quantity :Quantité d'articles achetés.
+\item
+  Tax 5\% : Montant de la taxe (5\%) sur l'achat.
+\item
+  Total :Montant total de l'achat (y compris la taxe).
+\item
+  Date : Date de l'achat .
+\item
+  Time : Heure de l'achat .
+\item
+  Payment : Mode de paiement (Ewallet, Cash, Credit card).
+\item
+  cogs (Cost of Goods Sold) :Coût des biens vendus.
+\item
+  gross margin percentage :Pourcentage de\\
+  marge brute.
+\item
+  gross income : Revenu brut
+\item
+  Rating : Évaluation du client pour l'expérience d'achat
+\end{itemize}
+
+\hypertarget{visualization-des-donnuxe9es}{%
+\section{Visualization des données}\label{visualization-des-donnuxe9es}}
+
+\hypertarget{la-relation-des-clients-avec-le-supermarchuxe9}{%
+\subsection{La relation des clients avec le
+supermarché:}\label{la-relation-des-clients-avec-le-supermarchuxe9}}
+
+\hypertarget{la-distribution-par-genre}{%
+\section{la distribution par genre}\label{la-distribution-par-genre}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{barplot}\NormalTok{(}\FunctionTok{table}\NormalTok{(basesm}\SpecialCharTok{$}\NormalTok{Gender), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{, }\StringTok{"pink"}\NormalTok{),}
+        \AttributeTok{main =} \StringTok{"Répartition du genre des clients"}\NormalTok{,}
+        \AttributeTok{xlab =} \StringTok{"Genre"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Fréquence"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetRMarkdown_files/figure-latex/unnamed-chunk-1-1.pdf}
+=\textgreater{} Ce graphique présente la répartition du genre des
+clients dans le supermarché, avec les couleurs bleue pour les clients
+masculins et rose pour les clients féminins.On peut constater que la
+difference entre le nombre des deux sexes des clients n'est pas vraiment
+significative.
+
+\hypertarget{la-distribution-du-type-de-client}{%
+\section{La distribution du type de
+client}\label{la-distribution-du-type-de-client}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{barplot}\NormalTok{(}\FunctionTok{table}\NormalTok{(basesm}\SpecialCharTok{$}\NormalTok{Customer.type), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"orange"}\NormalTok{, }\StringTok{"yellow"}\NormalTok{, }\StringTok{"green"}\NormalTok{),}
+        \AttributeTok{main =} \StringTok{"Répartition des types de clients"}\NormalTok{,}
+        \AttributeTok{xlab =} \StringTok{"Type de client"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Fréquence"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetRMarkdown_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+=\textgreater{} Ce graphique illustre la répartition des types de
+clients dans le supermarché, distinguant entre les membres (Member) et
+les clients non-membres (Normal). On conclut qu'il ya autant des membres
+que des clients normaux.
+
+\hypertarget{la-distribution-du-mode-de-paiement-par-genre}{%
+\section{La distribution du mode de paiement par
+genre}\label{la-distribution-du-mode-de-paiement-par-genre}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(basesm, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Gender, }\AttributeTok{fill =}\NormalTok{ Payment)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{"stack"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Répartition du mode de paiement par genre"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Genre"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Nombre de transactions"}\NormalTok{,}
+       \AttributeTok{fill =} \StringTok{"Mode de paiement"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetRMarkdown_files/figure-latex/unnamed-chunk-3-1.pdf}
+=\textgreater{} Ce graphique présente la répartition du mode de paiement
+utilisé par genre de client, empilant les différents modes de paiement
+pour chaque genre. On peut visualiser que les hommes paient un peu plus
+que les femmes avec leurs Ewallet pendant que les femmes utilisent plus
+du cash. \#\# Les méthodes de paiement utilsées dans le supermarché: \#
+La distribution des modes de paiement.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{barplot}\NormalTok{(}\FunctionTok{table}\NormalTok{(basesm}\SpecialCharTok{$}\NormalTok{Payment), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\StringTok{"red"}\NormalTok{, }\StringTok{"yellow"}\NormalTok{),}
+        \AttributeTok{main =} \StringTok{"Répartition des types de paiements"}\NormalTok{,}
+        \AttributeTok{xlab =} \StringTok{"Mode de paiement"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Fréquence"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetRMarkdown_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{      fill }\OtherTok{=} \StringTok{"Mode de paiement"}
+\end{Highlighting}
+\end{Shaded}
+
+=\textgreater{} Ce graphique montre la répartition des différents modes
+de paiement utilisés dans le supermarché. L'utilisation de la Ewallet et
+Cash sont les plus courrants et la credit card et un peu moins utilisées
+pour le paiement.
+
+\hypertarget{lhistogramme-des-prix-unitaires}{%
+\section{L'histogramme des prix
+unitaires}\label{lhistogramme-des-prix-unitaires}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(basesm}\SpecialCharTok{$}\NormalTok{Unit.price, }\AttributeTok{col =} \StringTok{"skyblue"}\NormalTok{,}
+     \AttributeTok{main =} \StringTok{"Répartition des prix unitaires"}\NormalTok{,}
+     \AttributeTok{xlab =} \StringTok{"Prix unitaire"}\NormalTok{,}
+     \AttributeTok{ylab =} \StringTok{"Fréquence"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetRMarkdown_files/figure-latex/unnamed-chunk-5-1.pdf}
+=\textgreater{} Cet histogramme présente la distribution des prix
+unitaires des produits vendus dans le supermarché.Les Poduits les plus
+vendus sont les produit les plus chères , sinon tout les produits sont
+vendus d'une frequence entre 100 et 120.
+
+\hypertarget{plot-the-distribution-of-payment-modes-by-customer-type}{%
+\section{Plot the distribution of Payment modes by Customer
+type}\label{plot-the-distribution-of-payment-modes-by-customer-type}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(basesm, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{, }\AttributeTok{fill =} \StringTok{\textasciigrave{}}\AttributeTok{Customer.type}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{width =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_polar}\NormalTok{(}\AttributeTok{theta =} \StringTok{"y"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Répartition du mode de paiement par type de client"}\NormalTok{,}
+       \AttributeTok{fill =} \StringTok{"Type de client"}\NormalTok{,}
+       \AttributeTok{x =} \ConstantTok{NULL}\NormalTok{,}
+       \AttributeTok{y =} \ConstantTok{NULL}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetRMarkdown_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+=\textgreater{} Ce graphique montre la répartition du mode de paiement
+par type de client, en affichant les modes de paiement sous forme de
+diagramme en secteurs, séparés par type de client. N'importe qu'il soit
+le type du clients , les méthodes de paiements restent identiques.
+
+\hypertarget{la-relation-entre-les-produits-et-les-quantituxe9s}{%
+\subsection{La relation entre les produits et les
+quantités:}\label{la-relation-entre-les-produits-et-les-quantituxe9s}}
+
+\hypertarget{plot-the-boxplot-of-total-purchase-amount-by-product-line}{%
+\section{Plot the boxplot of Total purchase amount by Product
+line}\label{plot-the-boxplot-of-total-purchase-amount-by-product-line}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(basesm, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Product.line, }\AttributeTok{y =}\NormalTok{ Total, }\AttributeTok{fill =}\NormalTok{ Product.line)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Montant total de l\textquotesingle{}achat par catégorie de produit"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Catégorie de produit"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Montant total de l\textquotesingle{}achat"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetRMarkdown_files/figure-latex/unnamed-chunk-7-1.pdf}
+=\textgreater{} Ce graphique présente la répartition du montant total de
+l'achat par catégorie de produit sous forme de boîtes à moustaches,
+permettant de visualiser les écarts entre les différentes catégories.
+Toutes les categories sont ont des montant d'achat proches , mais Home
+and LifeStyle et Health and Beauty sont les catégories les plus vendus
+suivi par Electronic accessories.
+
+\hypertarget{plot-the-histogram-of-quantity}{%
+\section{Plot the histogram of
+Quantity}\label{plot-the-histogram-of-quantity}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(basesm, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Quantity)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{fill =} \StringTok{"skyblue"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{bins =} \DecValTok{30}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribution de la quantité d\textquotesingle{}articles achetés"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Quantité d\textquotesingle{}articles"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Fréquence"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetRMarkdown_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+=\textgreater{} Cet histogramme illustre la distribution de la quantité
+d'articles achetés dans le supermarché. La fréquence des quantité
+d'articles égale à 10 est la plus supérieur pendant que la la quantité
+d'article égale à 8 a la plus faible frequence.
+
+\hypertarget{plot-the-histogram-of-gross-income}{%
+\section{Plot the histogram of Gross
+income}\label{plot-the-histogram-of-gross-income}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(basesm, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ gross.income)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{fill =} \StringTok{"lightgreen"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{bins =} \DecValTok{30}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribution des revenus bruts"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Revenu brut"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Fréquence"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetRMarkdown_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+=\textgreater{} Cet histogramme présente la distribution des revenus
+bruts générés par les ventes de produits dans le supermarché. Plus le
+revenue brute croit plus la frequence decroit .
+
+\hypertarget{les-produits-et-leurs-uxe9valuations}{%
+\subsection{Les produits et leurs
+évaluations:}\label{les-produits-et-leurs-uxe9valuations}}
+
+\hypertarget{plot-the-histogram-of-rating}{%
+\section{Plot the histogram of
+Rating}\label{plot-the-histogram-of-rating}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(basesm, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Rating)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{fill =} \StringTok{"orange"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{bins =} \DecValTok{30}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribution des évaluations des clients"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Évaluation"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Fréquence"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetRMarkdown_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+=\textgreater{} Cet histogramme illustre la distribution des évaluations
+données par les clients pour leur expérience d'achat dans le
+supermarché. la note la plus donnée est égale a 6 . c'est un peut rare
+pour un client qu'il donne la note 4 ou 10.
+
+\hypertarget{la-dispersion-entre-le-mode-de-paiement-et-la-notation.}{%
+\section{La dispersion entre le mode de paiement et la
+notation.}\label{la-dispersion-entre-le-mode-de-paiement-et-la-notation.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(basesm) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Payment, }\AttributeTok{y =}\NormalTok{ Rating)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Nuage de points entre le mode de paiement et l\textquotesingle{}évaluation"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Mode de paiement"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Évaluation"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetRMarkdown_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+=\textgreater{} Ce nuage de points montre la relation entre le mode de
+paiement utilisé et l'évaluation donnée par les clients pour leur
+expérience d'achat. Les clients qui paient avec la credit card ou
+Ewallet donnent les meilleurs evaluations.
+
+\hypertarget{les-types-de-produits-et-leurs-ventes}{%
+\subsection{Les types de produits et leurs
+ventes:}\label{les-types-de-produits-et-leurs-ventes}}
+
+\hypertarget{la-distribution-des-lignes-de-produits}{%
+\section{La distribution des lignes de
+produits}\label{la-distribution-des-lignes-de-produits}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{barplot}\NormalTok{(}\FunctionTok{table}\NormalTok{(basesm}\SpecialCharTok{$}\NormalTok{Product.line))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetRMarkdown_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+=\textgreater{} Ce barplot présente la répartition des différents types
+de produits vendus dans le supermarché.L'existance des produits du
+Fashion Accesoiries est la plus remarquable pendant qu'il n ya pas trop
+de produit de Health and Beauty.
+
+\hypertarget{la-distribution-des-transactions-par-branche.}{%
+\section{la distribution des transactions par
+branche.}\label{la-distribution-des-transactions-par-branche.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(basesm, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Branch)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Nombre de transactions par succursale"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Succursale"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Nombre de transactions"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetRMarkdown_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+=\textgreater{} Ce graphique montre le nombre de transactions effectuées
+dans chaque succursale du supermarché. La succursale A a le plus nombre
+de transaction pendant que C a le nombre de transaction le plus
+inferieur.
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+En conclusion, l'analyse des ventes pour ce supermarché révèle une
+croissance constante dans les grandes villes, avec une concurrence
+accrue sur le marché. Les données historiques sur les ventes dans les
+trois succursales pendant trois mois fournissent une base solide pour
+l'application de méthodes d'analyse prédictive, facilitant ainsi la
+prise de décisions éclairées pour optimiser les performances et rester
+compétitif sur le marché des supermarchés.
+
+\end{document}

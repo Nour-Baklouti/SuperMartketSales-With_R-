@@ -1,0 +1,276 @@
+---
+title: 'Projet : Super Market Sales Visualizations'
+author: "Tek-Up School"
+date: "2023-2024"
+output:
+  html_document:
+    df_print: paged
+  pdf_document:
+    df_print: paged
+    keep_tex: yes
+    latex_engine: xelatex
+header-includes:
+- \usepackage{sectsty}
+- \sectionfont{\fontsize{20}{25}\selectfont}
+- \subsectionfont{\fontsize{16}{20}\selectfont}
+---
+
+\vspace{4.5cm}
+
+## Présenté par :
+
+- Nour Baklouti
+- Rania Dridi
+
+\vspace{0.5cm}
+
+## Encadré par :
+
+- Dr. Nadjib Mohamed Mehdi BENDAOUD
+
+\vfill
+ 
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+## Supermarket Data Visualization
+
+Ce rapport vise à visualiser et à analyser :
+
+1.La relation des clients avec le supermarché.  
+
+2.Les méthodes de paiement utilisées dans le supermarché.  
+
+3.La relation entre les produits et les quantités.
+
+4.Les produits et leurs évaluations.
+
+5.Les types de produits et leurs ventes.
+
+
+=> Pour plus d'informations, vous trouverez ci-joint le lien vers notre notebook Kaggle.
+
+<https://www.kaggle.com/code/nourbaklouti/bi-supermarket>.
+
+
+## Résumé du DataFrame
+
+```{r import-data  }
+library(ggplot2)
+library(tidyverse) 
+basesm<-read.csv("C:/Users/nourb/Desktop/SupermarketSales/bdsupermarket_sales.csv")
+
+
+
+summary(basesm)
+
+
+
+```
+
+# Description des variables
+Les variables présentes dans le jeu de données sont les suivantes :
+
+* Invoice ID : Identifiant unique de la facture.
+
+* Branch : Succursale du supermarché (A, B, C).
+
+* City :Ville où se trouve le supermarché.
+
+* Customer type :Type de client (Member pour membre, Normal pour non-membre).
+* Gender : Genre du client (Male pour homme, Female pour femme).
+* Product line :Catégorie du produit.
+* Unit price : Prix unitaire du produit.
+* Quantity :Quantité d'articles achetés.
+* Tax 5% : Montant de la taxe (5%) sur l'achat.
+* Total :Montant total de l'achat (y compris la taxe).
+* Date : Date de l'achat .
+
+* Time : Heure de l'achat .
+
+* Payment : Mode de paiement (Ewallet, Cash, Credit card).
+
+* cogs (Cost of Goods Sold) :Coût des biens vendus.
+
+* gross margin percentage :Pourcentage de  
+marge brute.
+
+* gross income : Revenu brut
+
+* Rating : Évaluation du client pour l'expérience d'achat
+
+# Visualization des données
+## La relation des clients avec le supermarché:
+
+# la distribution par genre
+``` {r}
+barplot(table(basesm$Gender), col = c("blue", "pink"),
+        main = "Répartition du genre des clients",
+        xlab = "Genre", ylab = "Fréquence")
+```
+=> Ce graphique présente la répartition du genre des clients dans le supermarché, avec les couleurs bleue pour les clients masculins et rose pour les clients féminins.On peut constater que la difference entre le nombre des deux sexes des clients n'est pas vraiment significative.
+
+
+# La distribution du type de client
+``` {r}
+barplot(table(basesm$Customer.type), col = c("orange", "yellow", "green"),
+        main = "Répartition des types de clients",
+        xlab = "Type de client", ylab = "Fréquence")
+```
+
+=> Ce graphique illustre la répartition des types de clients dans le supermarché, distinguant entre les membres (Member) et les clients non-membres (Normal). On conclut qu'il ya autant des membres que des clients normaux.
+
+# La distribution du mode de paiement par genre
+``` {r}
+ggplot(basesm, aes(x = Gender, fill = Payment)) +
+  geom_bar(position = "stack") +
+  labs(title = "Répartition du mode de paiement par genre",
+       x = "Genre",
+       y = "Nombre de transactions",
+       fill = "Mode de paiement")
+```    
+=>  Ce graphique présente la répartition du mode de paiement utilisé par genre de client, empilant les différents modes de paiement pour chaque genre. On peut visualiser que les hommes paient un peu plus que les femmes avec leurs Ewallet pendant que les femmes utilisent plus du cash.
+## Les méthodes de paiement utilsées dans le supermarché:
+# La distribution des modes de paiement.
+``` {r}
+barplot(table(basesm$Payment), col = c("blue", "green", "red", "yellow"),
+        main = "Répartition des types de paiements",
+        xlab = "Mode de paiement", ylab = "Fréquence")
+      fill = "Mode de paiement"
+``` 
+
+=> Ce graphique montre la répartition des différents modes de paiement utilisés dans le supermarché. L'utilisation de la Ewallet et Cash sont les plus courrants et la credit card et un peu moins utilisées pour le paiement.
+
+# L'histogramme des prix unitaires
+``` {r}
+hist(basesm$Unit.price, col = "skyblue",
+     main = "Répartition des prix unitaires",
+     xlab = "Prix unitaire",
+     ylab = "Fréquence")
+```
+=>  Cet histogramme présente la distribution des prix unitaires des produits vendus dans le supermarché.Les Poduits les plus vendus sont les produit les plus chères , sinon tout les produits sont vendus d'une frequence entre 100 et 120.
+
+# Plot the distribution of Payment modes by Customer type
+
+``` {r}
+
+ggplot(basesm, aes(x = "", fill = `Customer.type`)) +
+  geom_bar(width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Répartition du mode de paiement par type de client",
+       fill = "Type de client",
+       x = NULL,
+       y = NULL)
+```
+
+=>  Ce graphique montre la répartition du mode de paiement par type de client, en affichant les modes de paiement sous forme de diagramme en secteurs, séparés par type de client. N'importe qu'il soit le type du clients , les méthodes de paiements restent identiques.
+
+##  La relation entre les produits et les quantités:
+
+# Plot the boxplot of Total purchase amount by Product line
+
+``` {r}
+
+ggplot(basesm, aes(x = Product.line, y = Total, fill = Product.line)) +
+  geom_boxplot() +
+  labs(title = "Montant total de l'achat par catégorie de produit",
+       x = "Catégorie de produit",
+       y = "Montant total de l'achat")
+
+```
+=> Ce graphique présente la répartition du montant total de l'achat par catégorie de produit sous forme de boîtes à moustaches, permettant de visualiser les écarts entre les différentes catégories. Toutes les categories sont ont des montant d'achat proches , mais Home and LifeStyle et Health and Beauty sont les catégories les plus vendus suivi par Electronic accessories.
+
+# Plot the histogram of Quantity
+
+``` {r}
+
+ggplot(basesm, aes(x = Quantity)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 30) +
+  labs(title = "Distribution de la quantité d'articles achetés",
+       x = "Quantité d'articles",
+       y = "Fréquence")
+
+```
+
+=> Cet histogramme illustre la distribution de la quantité d'articles achetés dans le supermarché. La fréquence des quantité d'articles égale à 10 est la plus supérieur pendant que la la quantité d'article égale à 8 a la plus faible frequence.
+
+# Plot the histogram of Gross income
+
+``` {r}
+
+ggplot(basesm, aes(x = gross.income)) +
+  geom_histogram(fill = "lightgreen", color = "black", bins = 30) +
+  labs(title = "Distribution des revenus bruts",
+       x = "Revenu brut",
+       y = "Fréquence")
+
+```
+
+=> Cet histogramme présente la distribution des revenus bruts générés par les ventes de produits dans le supermarché. Plus le revenue brute croit plus la frequence decroit .
+
+##  Les produits et leurs évaluations:
+
+# Plot the histogram of Rating
+
+``` {r}
+
+ggplot(basesm, aes(x = Rating)) +
+  geom_histogram(fill = "orange", color = "black", bins = 30) +
+  labs(title = "Distribution des évaluations des clients",
+       x = "Évaluation",
+       y = "Fréquence")
+
+``` 
+       
+=> Cet histogramme illustre la distribution des évaluations données par les clients pour leur expérience d'achat dans le supermarché. la note la plus donnée est égale a 6 . c'est un peut rare pour un client qu'il donne la note 4 ou 10.
+
+# La dispersion entre le mode de paiement et la notation.
+
+``` {r}
+
+ggplot(basesm) +
+  geom_point(aes(x = Payment, y = Rating)) +
+  labs(title = "Nuage de points entre le mode de paiement et l'évaluation",
+       x = "Mode de paiement",
+       y = "Évaluation")
+
+```
+
+=> Ce nuage de points montre la relation entre le mode de paiement utilisé et l'évaluation donnée par les clients pour leur expérience d'achat. Les clients qui paient avec la credit card ou Ewallet donnent les meilleurs evaluations.
+
+
+
+## Les types de produits et leurs ventes:
+#  La distribution des lignes de produits
+``` {r}
+
+barplot(table(basesm$Product.line))
+``` 
+
+=>  Ce barplot présente la répartition des différents types de produits vendus dans le supermarché.L'existance des produits du Fashion Accesoiries est la plus remarquable pendant qu'il n ya pas trop de produit de Health and Beauty.
+
+# la distribution des transactions par branche.
+
+
+``` {r} 
+
+ggplot(basesm, aes(x = Branch)) +
+  geom_bar(fill = "lightblue") +
+  labs(title = "Nombre de transactions par succursale",
+       x = "Succursale",
+       y = "Nombre de transactions")
+
+```
+
+=> Ce graphique montre le nombre de transactions effectuées dans chaque succursale du supermarché. La succursale A a le plus nombre de transaction pendant que C a le nombre de transaction le plus inferieur.
+
+# Conclusion
+
+En conclusion, l'analyse des ventes pour ce supermarché révèle une croissance constante dans les grandes villes, avec une concurrence accrue sur le marché. Les données historiques sur les ventes dans les trois succursales pendant trois mois fournissent une base solide pour l'application de méthodes d'analyse prédictive, facilitant ainsi la prise de décisions éclairées pour optimiser les performances et rester compétitif sur le marché des supermarchés.
+
+
